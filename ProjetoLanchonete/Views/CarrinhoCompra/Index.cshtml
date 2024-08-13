@@ -1,0 +1,63 @@
+﻿@model CarrinhoCompraViewModel
+
+<div class="container">
+	<div class="row">
+		<img src="~/Image/CarrinhoCompra.svg"/>
+		<div> 
+			<h4>Carrinho de Compra : </h4>
+		</div>
+
+		<table class="table table-bordered table-striped">
+			<tread>
+				<tr>
+					<th>Quantidade</th>
+					<th>Lanche</th>
+					<th class="text-rigth">Preço</th>
+					<th class="text-rigth">Subtotal</th>
+					<th></th>
+				</tr>
+			</tread>
+
+			<tbody>
+				@foreach(var item in Model.CarrinhoCompra.CarrinhoCompraItems)
+				{
+					<tr>
+						<td class="text-center">@item.Quantidade</td>
+						<td class="text-left">@item.Lanche.Nome</td>
+						<td class="text-rigth">@item.Lanche.Preco.ToString("c")</td>
+
+						<td class="text-rigth">
+							@((item.Quantidade * item.Lanche.Preco).ToString("c"))
+						</td>
+
+						<td class="text-rigth">
+							<a asp-controller="carrinhoCompra" asp-action="RemoverItemCarrinhoCompra"
+							asp-route-lancheId="@item.Lanche.LancheId"><img src="~/Image/Lixeira.svg" /></a>
+						</td>
+					</tr>
+
+				}
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="3" class="text-rigth">Total:</td>
+					<td class="text-rigth">
+						@Model.CarrinhoCompraTotal.ToString("c")
+					</td>
+				</tr>
+			</tfoot>
+
+		</table>
+		<div class="text-rigth">
+			<div class="btn-group">
+				<a class="	btn btn-sucess" asp-controller="Pedido" asp-action="Checkout">Encerrar Pedido</a>
+				&nbsp;&nbsp;&nbsp;
+				<a class="btn btn-primary" asp-controller="Lanche" asp-action="List">Continuar Comprando </a>
+			</div>
+
+		</div>
+
+
+			
+	</div>
+</div>

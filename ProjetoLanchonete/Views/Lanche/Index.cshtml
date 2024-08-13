@@ -1,0 +1,21 @@
+﻿@model ProjetoLanchonete.ViewModels.lancheIndexViewModel;
+
+<div>
+	<h2>@Model.CategoriaAtual</h2>
+</div>
+
+
+
+
+<div class="container">
+
+	<div class="row">
+
+	
+	@foreach (var Lanche in Model.Lanches)
+		{	
+			<partial name="_LancheResumo" for="@Lanche"/>	
+		}
+
+	</div>
+</div>
